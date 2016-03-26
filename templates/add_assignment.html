@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Assignment Creation</title>
+    <script>
+        function go_to_URL(){
+            var linkURL;
+            var assignment_name = document.getElementById("assignment_name");
+            var due_date = document.getElementById("due_date");
+            var time_to_complete = document.getElementById("time_to_complete");
+            var linkURL = "add_assignment/"+assignment_name.value+"/"+due_date.value+"/"+time_to_complete.value;
+            window.location.href=linkURL;
+        }
+    </script>
+</head>
+<body>
+    <h1>Mom's spaghetti!</h1>
+     <form>
+          Name of Assignment:<br>
+          <input type="text" id="assignment_name"><br>
+          Due Date:<br>
+          <input type="text" id="due_date"><br>
+          Estimated Time to Complete:<br>
+          <input type="text" id="time_to_complete"><br><br>
+          <button type="button" onclick="go_to_URL()">Submit</button>
+     </form>
+</body>
+</html>
