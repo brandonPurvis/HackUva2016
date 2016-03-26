@@ -29,7 +29,8 @@ def home():
 
 @app.route("/create_assignment")
 def create_assignment():
-    return render_template("add_assignment.html")
+    return render_template("create_assignment.html")
+
 
 @app.route("/add_assignment/<name>/<due>/<length>")
 def add_assignment(name, due, length):
