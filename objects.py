@@ -3,7 +3,7 @@ from datetime import datetime
 class Assignment():
     def __init__(self, name, due, length):
         self.name = name
-        self.due = datetime.strptime(due, "%m~%d~%y~%H")
+        self.due = datetime.strptime(due, "%m~%d~%Y~%H")
         self.length = int(length)
 
     def __str__(self):
