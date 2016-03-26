@@ -1,9 +1,39 @@
 <html>
 
   <head>
+    <script>
+      function getCanvas(){
+      return document.getElementById("my_canvas");
+      };
+      
+      function drawSquare(){
+      var cvs = getCanvas();
+      var ctx = cvs.getContext("2d");
+      ctx.beginPath();
+      ctx.fillStyle = "#FF0000";
+      ctx.fillRect(0,0,150,75);
+      ctx.stroke();
+      };
+
+      function drawHello(){
+      var cvs = getCanvas();
+      var ctx = cvs.getContext("2d");
+      ctx.beginPath();
+      ctx.fillStyle = "#FF00FF";
+      ctx.font = "30px Arial";
+      ctx.fillText("Hello World",10,50);
+      };
+
+      function draw(){
+      drawSquare();
+      drawHello();
+      }
+    </script>
   </head>
-  <body>
+  <body onload="draw()">
     <h1>The greatest thing evar!!!</h1>
-    <button type="button" onclick="window.location.href='/create_assignment'">Create Assignment</button>
+    <button type="button" onclick="window.location.href='/create_assignment'">Create Assignment</button></br>
+    <canvas id="my_canvas" width="800" height="400"></canvas>
+
   </body>
 </html>
