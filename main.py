@@ -9,7 +9,6 @@ def home():
 def add_assignment():
     return render_template("add_assignment.html")
 
-
 if __name__ == "__main__":
     app.debug = True
     app.run()
