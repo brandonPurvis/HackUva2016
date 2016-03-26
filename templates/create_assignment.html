@@ -10,11 +10,11 @@
             var due_date_month = document.getElementById("due_date_month");
             var due_date_day = document.getElementById("due_date_day");
             var due_date_year = document.getElementById("due_date_year");
-            var due_date_time = document.getElementById("due_date_time");
+            var due_date_hour = document.getElementById("due_date_hour");
             var time_to_complete = document.getElementById("time_to_complete");
             var linkURL = "create_assignment/"+assignment_name.value+"/"+
                             due_date_month.value+"~"+due_date_day.value+"~"+
-                            due_date_year.value+"~"+due_date_time.value+"/"+
+                            due_date_year.value+"~"+due_date_hour.value+"/"+
                             time_to_complete.value;
             window.location.href=linkURL;
         }
@@ -40,7 +40,7 @@
           <input type="text" id="due_date_month" maxlength="2" size="2"> /
           <input type="text" id="due_date_day"   maxlength="2" size="2"> /
           <input type="text" id="due_date_year"  maxlength="4" size="4" value="2016"> at
-          <input type="text" id="due_date_time"  maxlength="2" size="2" value="2016"> o'clock
+          <input type="text" id="due_date_hour"  maxlength="2" size="2" value="2016"> o'clock
           <br>
           Estimated Hours to Complete:<br>
           <input type="text" id="time_to_complete"><br><br>
