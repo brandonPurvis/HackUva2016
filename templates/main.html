@@ -34,9 +34,14 @@
       };
 
       function draw(){
-      drawSquare();
-      drawHello();
-      drawRect(50, 80, 200, 3);
+      var rects = [[0,0, 10, 29],[0,30,100, 29], [0,60,30,29],[0,90,400,29]];
+      rects.forEach(function(lst){
+      var a = lst[0];
+      var b = lst[1];
+      var c = lst[2];
+      var d = lst[3];
+      drawRect(a, b, c, d);
+      });
       }
     </script>
   </head>
