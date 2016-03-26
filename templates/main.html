@@ -5,6 +5,15 @@
       function getCanvas(){
       return document.getElementById("my_canvas");
       };
+
+      function drawRect(x, y, w, h){
+      var cvs = getCanvas();
+      var ctx = cvs.getContext("2d");
+      ctx.beginPath();
+      ctx.fillStyle = "#FF0000";
+      ctx.fillRect(x, y, w, h);
+      ctx.stroke();
+      };
       
       function drawSquare(){
       var cvs = getCanvas();
@@ -27,6 +36,7 @@
       function draw(){
       drawSquare();
       drawHello();
+      drawRect(50, 80, 200, 3);
       }
     </script>
   </head>
