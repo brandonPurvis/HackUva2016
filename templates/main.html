@@ -62,6 +62,7 @@
       drawRect_Est(a, b, est, d-5)
       writeText(a + 5, b+(d/2)-5, lst["name_and_est"]);
       writeText(a + 5, b +(d/2)+15, lst["panic_time"]);
+      writeText(Math.min(c + 5, 600),b +(d/2), " " + lst["danger_level_worst"]+ " " + lst["danger_level_best"] );
       });
 
       function getRects(){

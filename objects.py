@@ -10,6 +10,10 @@ class Assignment():
     def __str__(self):
         return "[Assignment {} {} {}]".format(self.name, self.due, self.length)
 
+
+    def __cmp__(self, other):
+        return self.till_due() - other.till_due()
+    
     def html(self):
         return "<p>{}</p>".format(str(self))
 
