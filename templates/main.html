@@ -14,6 +14,15 @@
       ctx.fillRect(x, y, w, h);
       ctx.stroke();
       };
+
+      function drawRect_Est(x, y, w, h){
+      var cvs = getCanvas();
+      var ctx = cvs.getContext("2d");
+      ctx.beginPath();
+      ctx.fillStyle = "#0000FF";
+      ctx.fillRect(x, y, w, h);
+      ctx.stroke();
+      };
       
       function drawSquare(){
       var cvs = getCanvas();
@@ -37,7 +46,7 @@
       var cvs = getCanvas();
       var ctx = cvs.getContext("2d");
       ctx.fillStyle = "#000000";
-      ctx.font = "30px Arial";
+      ctx.font = "20px Arial";
       ctx.fillText(message, x, y);
       };
       
@@ -48,8 +57,11 @@
       var b = lst["bounds"][1];
       var c = lst["bounds"][2];
       var d = lst["bounds"][3];
+      var est = lst["est"];
       drawRect(a, b, c, d);
-      writeText(a + 5, b + (d / 2), lst["name"]);
+      drawRect_Est(a, b, est, d-5)
+      writeText(a + 5, b+(d/2)-5, lst["name_and_est"]);
+      writeText(a + 5, b +(d/2)+15, lst["panic_time"]);
       });
 
       function getRects(){
@@ -63,7 +75,7 @@
   </head>
   <body onload="drawRects()">
     <h1>The greatest thing evar!!!</h1>
-    <button type="button" onclick="window.location.href='/create_assignment'">Create Assignment</button></br>
+    <button type="button" onclick="window.location.href='/create_assignment'">Create Assignment</button></br><br>
     <canvas id="my_canvas" width="800" height="400"></canvas>
 
   </body>
