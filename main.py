@@ -54,7 +54,16 @@ def test_danger():
         amt_of_work = sum([asgn.length for asgn in assignments[:i]])
         danger_levels.append((int(upper_time - amt_of_work), int(upper_time / 2 - amt_of_work)))
     return danger_levels
-    
+
+def work_percents():
+    assignments = pstore.store
+    assignments = sorted(assignments, key=lambda d: d.due)
+    percents = []
+    for i, assign in enumerate(assignments):
+        total_time = assign.till_due()
+        work_time = sum([asgn.length for asgn in assignments[:i]])
+        percents.append((work_time/float(total_time))*100)
+    return percents
 
 @app.route("/get_rects/<canvas_width>/<canvas_height>/")
 def get_rects(canvas_width, canvas_height):
@@ -67,12 +76,13 @@ def get_rects(canvas_width, canvas_height):
     curr_task = 0
     coordinate_list = []
     danger_levels = test_danger()
+    percent = work_percents()
     for i, asgn in enumerate(pstore.store):
             till_due = int( (asgn.due - datetime.now()).total_seconds()/3600)
             assign_x = int((till_due/till_due_max)*canvas_width)
             assign_y = int(canvas_height/number_of_assignments)
             est = int((asgn.length/till_due_max)*canvas_width);
-            name_and_est = "" + str(asgn.name)+ "    est: " + str(asgn.length) + " hours"
+            name_and_est = "" + str(asgn.name)+ " (" + str(asgn.length) + " hours)"
             panic_time = "due in "+str(till_due)+" hours "
             print(panic_time)
             curr_task_coor = {"est": est,
@@ -81,6 +91,7 @@ def get_rects(canvas_width, canvas_height):
                               "panic_time": panic_time,
                               "danger_level_best": "" if danger_levels[i][0] > 0 else "YOUR DEAD",
                               "danger_level_worst": "" if danger_levels[i][1] > 0 else "TROUBLE",
+                              "work_percent": "HIGH WORK LOAD ALERT! ({:.1f}% of time)".format(percent[i]) if (percent[i] > 60) else "",
             }
             coordinate_list.append(curr_task_coor)
             curr_task += 1
