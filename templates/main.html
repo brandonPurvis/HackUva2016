@@ -45,7 +45,7 @@
 
       function getRects(){
       var xmlHttp = new XMLHttpRequest();
-      xmlHttp.open( "GET", "/get_rects", false );
+      xmlHttp.open( "GET", "/get_rects/800/400/", false );
       xmlHttp.send( null );
       return JSON.parse(xmlHttp.responseText);
       };
