@@ -1,50 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Assignment Creation</title>
-    <script>
-        function go_to_URL(){
-            var linkURL;
-            var assignment_name = document.getElementById("assignment_name");
-            var due_date_month = document.getElementById("due_date_month");
-            var due_date_day = document.getElementById("due_date_day");
-            var due_date_year = document.getElementById("due_date_year");
-            var due_date_hour = document.getElementById("due_date_hour");
-            var time_to_complete = document.getElementById("time_to_complete");
-            var linkURL = "add_assignment/"+assignment_name.value+"/"+
-                            due_date_month.value+"~"+due_date_day.value+"~"+
-                            due_date_year.value+"~"+due_date_hour.value+"/"+
-                            time_to_complete.value;
-            window.location.href=linkURL;
-        }
-    </script>
-    <!--  Boostrap CDN -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
-          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
-          crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
-          integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r"
-          crossorigin="anonymous">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
-            integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
-            crossorigin="anonymous">
-    </script>
-</head>
-<body>
-    <h1>Mom's spaghetti!</h1>
-     <form>
-          Name of Assignment:<br>
-          <input type="text" id="assignment_name"><br>
-          Due Date (MM/DD/YYYY):<br>
-          <input type="text" id="due_date_month" maxlength="2" size="2"> /
-          <input type="text" id="due_date_day"   maxlength="2" size="2"> /
-          <input type="text" id="due_date_year"  maxlength="4" size="4" value="2016"> at
-          <input type="text" id="due_date_hour"  maxlength="2" size="2" > o'clock
+{% extends "base.html" %}
+
+{% block head %}
+{{ super() }}
+<script>
+  function go_to_URL(){
+  var linkURL;
+  var assignment_name = document.getElementById("assignment_name");
+  var due_date_month = document.getElementById("due_date_month");
+  var due_date_day = document.getElementById("due_date_day");
+  var due_date_year = document.getElementById("due_date_year");
+  var due_date_hour = document.getElementById("due_date_hour");
+  var time_to_complete = document.getElementById("time_to_complete");
+  var linkURL = "add_assignment/"+assignment_name.value+"/"+
+  due_date_month.value+"~"+due_date_day.value+"~"+
+  due_date_year.value+"~"+due_date_hour.value+"/"+
+  time_to_complete.value;
+  window.location.href=linkURL;
+  }
+</script>
+{% endblock %}
+
+{% block header %}
+<div class="page-header">
+  <h1>Add Assignment</h1>
+</div>
+{% endblock %}
+
+{% block content %}
+     <div class="form-group">
+          <label>Name of Assignment:</label>
+          <input type="text" id="assignment_name" placeholder="assignemnt"><br>
+          <label>Due Date (MM/DD/YYYY):</label>
+          <input type="text" id="due_date_month" maxlength="2" size="2" value="3"> /
+          <input type="text" id="due_date_day"   maxlength="2" size="2" value="27"> /
+          <input type="text" id="due_date_year"  maxlength="4" size="4" value="2016">
+	  <label>@</label>
+          <input type="text" id="due_date_hour"  maxlength="2" size="2" value="23">
+	  <label>:00</label>
           <br>
-          Estimated Hours to Complete:<br>
-          <input type="text" id="time_to_complete"><br><br>
-          <button type="button" onclick="go_to_URL()">Submit</button>
-     </form>
-</body>
-</html>
+          <label>Estimated Hours to Complete:</label>
+          <input type="text" id="time_to_complete" size="3" value=3 ></input>
+     </div>
+     <button class="btn btn-success col-md-2" type="button" onclick="go_to_URL()">Add Assignment</button>
+     <button class="btn btn-secondary" type="button" onclick="window.location.href='/';">Cancel</button>
+{% endblock %}

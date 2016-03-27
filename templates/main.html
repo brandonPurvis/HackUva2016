@@ -1,83 +1,93 @@
-<html>
+{% extends "base.html" %}
 
-  <head>
-    <script>
-      function getCanvas(){
-      return document.getElementById("my_canvas");
-      };
+{% block head %}
+{{ super() }}
+<script>
+  window.onload = function(){drawRects();};
+  function getCanvas(){
+  return document.getElementById("my_canvas");
+  };
+  
+  function drawRect(x, y, w, h){
+  var cvs = getCanvas();
+  var ctx = cvs.getContext("2d");
+  ctx.beginPath();
+  ctx.fillStyle = "#F59A2C";
+  ctx.fillRect(x, y, w, h);
+  ctx.stroke();
+  };
+  
+  function drawRect_Est(x, y, w, h){
+  var cvs = getCanvas();
+  var ctx = cvs.getContext("2d");
+  ctx.beginPath();
+  ctx.fillStyle = "#0D3268";
+  ctx.fillRect(x, y, w, h);
+  ctx.stroke();
+  };
+  
+  function drawSquare(){
+  var cvs = getCanvas();
+  var ctx = cvs.getContext("2d");
+  ctx.beginPath();
+  ctx.fillStyle = "#FF0000";
+  ctx.fillRect(0,0,150,75);
+  ctx.stroke();
+  };
+  
+  function drawHello(){
+  var cvs = getCanvas();
+  var ctx = cvs.getContext("2d");
+  ctx.beginPath();
+  ctx.fillStyle = "#FF00FF";
+  ctx.font = "30px";
+  ctx.fillText("Hello World",10,50);
+  };
+  
+  function writeText(x, y, message){
+  var cvs = getCanvas();
+  var ctx = cvs.getContext("2d");
+  ctx.fillStyle = "#E6E7E8";
+  ctx.font = "20px Arial";
+  ctx.fillText(message, x, y);
+  };
+  
+  function drawRects(){
+  var rects = getRects()["rects"];
+  rects.forEach(function(lst){
+  var a = lst["bounds"][0];
+  var b = lst["bounds"][1];
+  var c = lst["bounds"][2];
+  var d = lst["bounds"][3];
+  var est = lst["est"];
+  drawRect(a, b, c, d);
+  drawRect_Est(a, b, est, d-5)
+  writeText(a + 5, b+(d/2)-5, lst["name_and_est"]);
+  writeText(a + 5, b +(d/2)+15, lst["panic_time"]);
+  });
+  
+  function getRects(){
+  var xmlHttp = new XMLHttpRequest();
+  xmlHttp.open( "GET", "/get_rects/1000/500/", false );
+  xmlHttp.send( null );
+  return JSON.parse(xmlHttp.responseText);
+  };
+  }
+</script>
+{% endblock %}
 
-      function drawRect(x, y, w, h){
-      var cvs = getCanvas();
-      var ctx = cvs.getContext("2d");
-      ctx.beginPath();
-      ctx.fillStyle = "#FF0000";
-      ctx.fillRect(x, y, w, h);
-      ctx.stroke();
-      };
+{% block header %}
+<div class="page-header">
+  <h1>Hoos Got Homework</h1>
+</div>
+{% endblock %}
 
-      function drawRect_Est(x, y, w, h){
-      var cvs = getCanvas();
-      var ctx = cvs.getContext("2d");
-      ctx.beginPath();
-      ctx.fillStyle = "#0000FF";
-      ctx.fillRect(x, y, w, h);
-      ctx.stroke();
-      };
-      
-      function drawSquare(){
-      var cvs = getCanvas();
-      var ctx = cvs.getContext("2d");
-      ctx.beginPath();
-      ctx.fillStyle = "#FF0000";
-      ctx.fillRect(0,0,150,75);
-      ctx.stroke();
-      };
+{% block content %}
+<div>
+  <button class="btn btn-primary btn-lg" type="button" onclick="window.location.href='/create_assignment'">Create Assignment</button></br><br>
+  <div class="well well-large">
+    <canvas id="my_canvas" width="1000" height="500"></canvas>
+  </div>
+</div>
+{% endblock %}
 
-      function drawHello(){
-      var cvs = getCanvas();
-      var ctx = cvs.getContext("2d");
-      ctx.beginPath();
-      ctx.fillStyle = "#FF00FF";
-      ctx.font = "30px";
-      ctx.fillText("Hello World",10,50);
-      };
-
-      function writeText(x, y, message){
-      var cvs = getCanvas();
-      var ctx = cvs.getContext("2d");
-      ctx.fillStyle = "#000000";
-      ctx.font = "20px Arial";
-      ctx.fillText(message, x, y);
-      };
-      
-      function drawRects(){
-      var rects = getRects()["rects"];
-      rects.forEach(function(lst){
-      var a = lst["bounds"][0];
-      var b = lst["bounds"][1];
-      var c = lst["bounds"][2];
-      var d = lst["bounds"][3];
-      var est = lst["est"];
-      drawRect(a, b, c, d);
-      drawRect_Est(a, b, est, d-5)
-      writeText(a + 5, b+(d/2)-5, lst["name_and_est"]);
-      writeText(a + 5, b +(d/2)+15, lst["panic_time"]);
-      writeText(Math.min(c + 5, 600),b +(d/2), " " + lst["danger_level_worst"]+ " " + lst["danger_level_best"] );
-      });
-
-      function getRects(){
-      var xmlHttp = new XMLHttpRequest();
-      xmlHttp.open( "GET", "/get_rects/800/400/", false );
-      xmlHttp.send( null );
-      return JSON.parse(xmlHttp.responseText);
-      };
-      }
-    </script>
-  </head>
-  <body onload="drawRects()">
-    <h1>The greatest thing evar!!!</h1>
-    <button type="button" onclick="window.location.href='/create_assignment'">Create Assignment</button></br><br>
-    <canvas id="my_canvas" width="800" height="400"></canvas>
-
-  </body>
-</html>
