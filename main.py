@@ -35,18 +35,19 @@ def show():
     for asgn in pstore.store:
         page += asgn.html()
     print(page)
-    print(assignment_list(pstore, 700, 700))
+    # print(assignment_list(pstore, 700, 700))
     return  make_response("<html><head></head><body>" + page + "</body></html>")
 
-def assignment_list(ptstore, canvas_width, canvas_height):
+@app.route("/get_rects/<canvas_width>/<canvas_height>")
+def get_rects(canvas_width, canvas_height):
     #Find distance of farthest assignment
-    till_due_max = max([(asgn.due - datetime.now()).total_seconds()/3600 for asgn in ptstore.store])
+    till_due_max = max([(asgn.due - datetime.now()).total_seconds()/3600 for asgn in pstore.store])
 
     # Creates list of coordinates for creating canvas boxes
-    number_of_assignments = len(ptstore.store)
+    number_of_assignments = len(pstore.store)
     curr_task = 0
     coordinate_list = []
-    for asgn in ptstore.store:
+    for asgn in pstore.store:
             till_due = int( (asgn.due - datetime.now()).total_seconds()/3600)
             assign_x = int((till_due/till_due_max)*canvas_width)
             assign_y = int(canvas_height/number_of_assignments)
