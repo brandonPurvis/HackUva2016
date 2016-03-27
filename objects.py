@@ -1,5 +1,6 @@
 from datetime import datetime
 
+
 class Assignment():
     def __init__(self, name, due, length):
         self.name = name
@@ -12,3 +13,5 @@ class Assignment():
     def html(self):
         return "<p>{}</p>".format(str(self))
 
+    def till_due(self):
+        return (self.due - datetime.now()).total_seconds()/3600

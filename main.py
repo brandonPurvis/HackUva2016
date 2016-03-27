@@ -37,7 +37,20 @@ def show():
         page += asgn.html()
     print(page)
     # print(assignment_list(pstore, 700, 700))
+    print(test_danger())
     return  make_response("<html><head></head><body>" + page + "</body></html>")
+
+@app.route("/test_danger")
+def test_danger(store=None):
+        assignments = pstore.store
+        assignments = sorted(assignments, key=lambda d: d.due)
+        danger_levels = []
+        for i, assign in enumerate(assignments):
+            upper_time = assign.till_due()
+            amt_of_work = sum([asgn.length for asgn in assignments[:i]])
+            danger_levels.append(amt_of_work)
+        return danger_levels
+    
 
 @app.route("/get_rects/<canvas_width>/<canvas_height>/")
 def get_rects(canvas_width, canvas_height):
