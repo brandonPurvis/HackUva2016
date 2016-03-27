@@ -5,6 +5,15 @@
       function getCanvas(){
       return document.getElementById("my_canvas");
       };
+
+      function drawRect(x, y, w, h){
+      var cvs = getCanvas();
+      var ctx = cvs.getContext("2d");
+      ctx.beginPath();
+      ctx.fillStyle = "#FF0000";
+      ctx.fillRect(x, y, w, h);
+      ctx.stroke();
+      };
       
       function drawSquare(){
       var cvs = getCanvas();
@@ -24,13 +33,26 @@
       ctx.fillText("Hello World",10,50);
       };
 
-      function draw(){
-      drawSquare();
-      drawHello();
+      function drawRects(){
+      var rects = getRects()["rects"];
+      rects.forEach(function(lst){
+      var a = lst[0];
+      var b = lst[1];
+      var c = lst[2];
+      var d = lst[3];
+      drawRect(a, b, c, d);
+      });
+
+      function getRects(){
+      var xmlHttp = new XMLHttpRequest();
+      xmlHttp.open( "GET", "/get_rects/800/400/", false );
+      xmlHttp.send( null );
+      return JSON.parse(xmlHttp.responseText);
+      };
       }
     </script>
   </head>
-  <body onload="draw()">
+  <body onload="drawRects()">
     <h1>The greatest thing evar!!!</h1>
     <button type="button" onclick="window.location.href='/create_assignment'">Create Assignment</button></br>
     <canvas id="my_canvas" width="800" height="400"></canvas>
