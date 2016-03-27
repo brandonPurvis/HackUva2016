@@ -53,7 +53,14 @@ def get_rects(canvas_width, canvas_height):
             till_due = int( (asgn.due - datetime.now()).total_seconds()/3600)
             assign_x = int((till_due/till_due_max)*canvas_width)
             assign_y = int(canvas_height/number_of_assignments)
-            curr_task_coor = {"name": asgn.name, "bounds" : [0, curr_task*assign_y, assign_x, assign_y - 5]}
+            est = 0;
+            name_and_est = "" + str(asgn.name)+ "    est: " + str(asgn.length) + " hours"
+            panic_time = "due in "+str(till_due)+" hours "
+            print(panic_time)
+            curr_task_coor = {"est": est,
+                              "name_and_est": name_and_est,
+                              "bounds" : [0, curr_task*assign_y, assign_x, assign_y - 5],
+                              "panic_time": panic_time}
             coordinate_list.append(curr_task_coor)
             curr_task += 1
     return jsonify({"rects":coordinate_list})
