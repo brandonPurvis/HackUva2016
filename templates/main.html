@@ -57,9 +57,9 @@
       var b = lst["bounds"][1];
       var c = lst["bounds"][2];
       var d = lst["bounds"][3];
-      //var est = lst["est"];
+      var est = lst["est"];
       drawRect(a, b, c, d);
-      //drawRect_Est(a, b, c, d)
+      drawRect_Est(a, b, est, d-5)
       writeText(a + 5, b+(d/2)-5, lst["name_and_est"]);
       writeText(a + 5, b +(d/2)+15, lst["panic_time"]);
       });
@@ -75,7 +75,7 @@
   </head>
   <body onload="drawRects()">
     <h1>The greatest thing evar!!!</h1>
-    <button type="button" onclick="window.location.href='/create_assignment'">Create Assignment</button></br>
+    <button type="button" onclick="window.location.href='/create_assignment'">Create Assignment</button></br><br>
     <canvas id="my_canvas" width="800" height="400"></canvas>
 
   </body>

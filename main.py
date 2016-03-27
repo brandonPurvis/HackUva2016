@@ -53,7 +53,7 @@ def get_rects(canvas_width, canvas_height):
             till_due = int( (asgn.due - datetime.now()).total_seconds()/3600)
             assign_x = int((till_due/till_due_max)*canvas_width)
             assign_y = int(canvas_height/number_of_assignments)
-            est = 0;
+            est = int((asgn.length/till_due_max)*canvas_width);
             name_and_est = "" + str(asgn.name)+ "    est: " + str(asgn.length) + " hours"
             panic_time = "due in "+str(till_due)+" hours "
             print(panic_time)
