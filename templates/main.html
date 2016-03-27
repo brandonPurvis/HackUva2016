@@ -33,8 +33,8 @@
       ctx.fillText("Hello World",10,50);
       };
 
-      function draw(){
-      var rects = [[0,0, 10, 29],[0,30,100, 29], [0,60,30,29],[0,90,400,29]];
+      function drawRects(){
+      var rects = getRects()["rects"];
       rects.forEach(function(lst){
       var a = lst[0];
       var b = lst[1];
@@ -42,10 +42,17 @@
       var d = lst[3];
       drawRect(a, b, c, d);
       });
+
+      function getRects(){
+      var xmlHttp = new XMLHttpRequest();
+      xmlHttp.open( "GET", "/get_rects", false );
+      xmlHttp.send( null );
+      return JSON.parse(xmlHttp.responseText);
+      };
       }
     </script>
   </head>
-  <body onload="draw()">
+  <body onload="drawRects()">
     <h1>The greatest thing evar!!!</h1>
     <button type="button" onclick="window.location.href='/create_assignment'">Create Assignment</button></br>
     <canvas id="my_canvas" width="800" height="400"></canvas>

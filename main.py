@@ -1,7 +1,7 @@
-
+import json
 import store
 from objects import Assignment
-from flask import Flask, render_template, make_response
+from flask import Flask, render_template, make_response, jsonify
 
 
 
@@ -28,6 +28,12 @@ def add_assignment(name, due, length):
     pstore.add_item(newAssignment)
     print("added " + str(newAssignment)) 
     return render_template("assignment_added.html")
+
+
+@app.route("/get_rects")
+def get_rects():
+    return jsonify({"rects":[[0,0, 10, 29],[0,30,100, 29], [0,60,30,29],[0,90,400,29]]})
+
 
 @app.route("/show")
 def show():
